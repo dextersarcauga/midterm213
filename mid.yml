@@ -1,0 +1,38 @@
+---
+- name: Configure Firewall
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install UFW on Ubuntu
+      package:
+        update_cache: false
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Install Firewalld on CentOS
+      file:
+        path: /home/punopaughey/assignments
+        state: directory
+        owner: nicolas
+        mode: '0755'
+      when: ansible_distribution == "CentOS"
+
+    - name: Enable UFW on Ubuntu
+      ufw:
+        state: enabled
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Start and enable Firewalld on CentOS
+      file:
+        path: /home/punopaughey/assignments
+        state: directory
+        owner: nicolas
+        mode: '0755'
+      when: ansible_distribution == "CentOS"
+
+    - name: Configure Firewall Rules for Firewalld
+      file:
+        path: /home/punopaughey/assignments
+        state: directory
+        owner: nicolas
+        mode: '0755'
+      when: ansible_distribution == "CentOS"
